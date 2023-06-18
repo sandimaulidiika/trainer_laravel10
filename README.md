@@ -1,4 +1,4 @@
-# First Learning Laravel
+# Learning CRUD Laravel 10
 
 This is my first laravel project. I'm learning to use laravel.
 
