@@ -22,4 +22,8 @@ Route::get('/home', function () {
     return view('layout.home');
 });
 
+Route::get('/students/add', function () {
+    return view('students.add');
+});
+
 Route::resource('students', StudentsController::class);

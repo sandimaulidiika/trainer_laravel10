@@ -11,7 +11,7 @@ class StoreStudentsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,34 @@ class StoreStudentsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'idstudent' => 'required|unique:students,idstudent|min:7|max:7',
+            'fullname' => 'required',
+            'gender' => 'required',
+            'email' => 'required|email|unique:students,email',
+            'phone' => 'required|numeric',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'idstudent.required' => 'Tidak Boleh Kosong',
+            'idstudent.unique' => 'NIM Sudah Terdaftar',
+            'idstudent.min' => 'NIM Minimal 7 Karakter',
+            'idstudent.max' => 'NIM Maksimal 7 Karakter',
+            'fullname.required' => 'Tidak boleh kosong',
+            'email.unique' => 'Email sudah digunakan',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'idstudent' => 'ID Student',
+            'fullname' => 'Full Name',
+            'gender' => 'Gender',
+            'email' => 'Email',
+            'phone' => 'Phone',
         ];
     }
 }

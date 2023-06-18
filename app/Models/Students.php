@@ -10,7 +10,14 @@ class Students extends Model
     use HasFactory;
 
     protected $table = 'students';
-    protected $primaryKey = 'idsutents';
+    protected $primaryKey = 'idstudent';
+    protected $fillable = [
+        'idstudent',
+        'fullname',
+        'gender',
+        'email',
+        'phone'
+    ];
 
     public $incrementing = false;
     public $timestamps = true;

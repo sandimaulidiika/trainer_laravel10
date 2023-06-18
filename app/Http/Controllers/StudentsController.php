@@ -19,50 +19,50 @@ class StudentsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreStudentsRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $students = new Students;
+        $students->idstudent = $request->idstudent;
+        $students->fullname = $request->fullname;
+        $students->gender = $request->gender;
+        $students->email = $request->email;
+        $students->phone = $request->phone;
+        $students->save();
+
+        return redirect('students')->with('msg', 'with the name ' . $request->fullname . ' has been added');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Students $students)
+    public function show(Students $students, $idstudent)
     {
-        //
+        $data = Students::find($idstudent);
+
+        return view('students.edit', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Students $students)
+    public function update(UpdateStudentsRequest $request, Students $students, $idstudent)
     {
-        //
+        $data = $students->find($idstudent);
+        $data->fullname = $request->fullname;
+        $data->gender = $request->gender;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->save();
+
+        return redirect('students')->with('msg', 'with the name ' . $request->fullname . ' has been edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateStudentsRequest $request, Students $students)
+    public function destroy(Students $students, $idstudent)
     {
-        //
-    }
+        $data = $students->find($idstudent);
+        $data->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Students $students)
-    {
-        //
+        return redirect('students')->with('msg', 'with the name ' . $data->fullname . ' has been delete');
     }
 }
