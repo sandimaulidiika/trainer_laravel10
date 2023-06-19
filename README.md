@@ -45,10 +45,6 @@ Migrasi database
   php artisan migrate
 ```
 
-```bash
-  php artisan key:generate
-```
-
 Run
 
 ```bash
